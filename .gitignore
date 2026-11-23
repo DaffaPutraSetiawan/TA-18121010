@@ -1,0 +1,25 @@
+# Dataset mentah (besar, unduh sendiri - lihat data/README.md)
+data/*
+!data/README.md
+
+# Hasil eksperimen (dibuat ulang dengan menjalankan kode)
+hasil/
+hasil_*/
+
+# Arsip unduhan
+*.zip
+*.tar.gz
+*.gz
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
