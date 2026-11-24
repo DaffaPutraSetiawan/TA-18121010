@@ -15,6 +15,7 @@ Kebijakan yang dibandingkan: **static** (kapasitas tetap dari beban puncak), **r
 │   └── adaptive_lms_model.py       # pendukung: prediksi risiko mahasiswa (beban kerja ML yang ikut dijadwalkan)
 ├── data/README.md                  # cara mengunduh dan menata dataset
 ├── docs/URUTAN_PENGERJAAN.md       # checklist langkah pengerjaan TA
+├── docs/KEPUTUSAN_BIMBINGAN.md     # catatan keputusan dengan dosen pembimbing
 ├── hasil/                          # keluaran eksperimen (tidak di-commit)
 └── requirements.txt
 ```
@@ -45,8 +46,6 @@ python src/server_trace_experiment.py --trace bitbrains --trace_dir data/bitbrai
 # Eksperimen B: trafik LMS (OULAD) dengan parameter server dari jejak riil
 python src/adaptive_lms_resource.py --data_dir data/OULAD --calib hasil/trace/kalibrasi_dari_trace.json --out_dir hasil/resource_kalibrasi
 
-# (Opsional) Alibaba sebagai pembanding
-python src/server_trace_experiment.py --trace alibaba --trace_dir data/alibaba2018 --max_machines 300 --out_dir hasil/trace_alibaba
 ```
 
 Parameter `ResourceConfig` bisa diubah dari baris perintah, misalnya `--rps_per_vcpu 12 --target_cpu_util 0.6 --node_price_hour 0.1235`. Daftar lengkapnya: `python src/adaptive_lms_resource.py --help`.
@@ -87,13 +86,12 @@ Pengujian: static vs reactive vs predictive vs oracle → biaya, utilisasi, jam 
 | `object_price_gb_month` | 0,025 USD/GB-bulan | S3 Standard, Jakarta, AWS Pricing Calculator |
 | `gpu_price_hour` | 0,736 USD/jam | EC2 g4dn.xlarge (1× T4), Singapura; job pelatihan batch |
 
-Yang masih asumsi: `rps_per_vcpu` dan `req_per_click` (konversi request LMS ke beban CPU). Kalibrasi dengan uji beban Moodle (Locust/JMeter) bila memungkinkan.
+Yang masih asumsi: `rps_per_vcpu` dan `req_per_click` (konversi request LMS ke beban CPU). Nilainya akan diukur lewat uji beban Moodle dengan Locust (tahap 3B di `docs/URUTAN_PENGERJAAN.md`).
 
 ## Sitasi dataset
 
 - Kuzilek, J., Hlosta, M., & Zdrahal, Z. (2017). Open University Learning Analytics dataset. *Scientific Data, 4*, 170171. https://doi.org/10.1038/sdata.2017.171
 - Shen, S., van Beek, V., & Iosup, A. (2015). Statistical characterization of business-critical workloads hosted in cloud datacenters. *CCGrid 2015* (Bitbrains GWA-T-12).
-- Alibaba Inc. (2018). Alibaba production cluster data v2018. https://github.com/alibaba/clusterdata
 
 ## Urutan pengerjaan
 
